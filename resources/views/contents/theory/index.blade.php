@@ -94,7 +94,7 @@
 		                	<td>{{ $theory->name }}</td>
 		                	<td>{{ $theory->description }}</td>
 		                	<td>{{ $theory->category->category }}</td>
-		                	<td>{{ $theory->confluence->confluence }}</td>
+		                	<td>{{ !is_null($theory->confluence) ? $theory->confluence->confluence : "-" }}</td>
 		                	<td>{{ $theory->created_at }}</td>
 		                	<td>{{ $theory->updated_at }}</td>
 		                	<td>

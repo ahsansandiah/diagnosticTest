@@ -89,7 +89,7 @@
 					              			</div>
 					              			<div class="modal-body">
 					                			<!-- form start -->
-									            <form method="POST" action="{{ url('admin/confluence/update') }}">
+									            <form method="POST" action="{{ url('admin/confluence/update/'.$confluence->id) }}">
 									            	@csrf
 									              	<div class="box-body">
 									               		<div class="form-group">

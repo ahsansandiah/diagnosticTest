@@ -11,4 +11,14 @@ class Question extends Model
 
     protected $table = "question";
     protected $guarded = [];
+
+    public function answers()
+    {
+    	return $this->hasMany('App\Models\Answer', 'question_id', 'id');
+    }
+
+    public function theory()
+    {
+    	return $this->hasOne('App\Models\Theory', 'id', 'theory_id');
+    }
 }

@@ -17,7 +17,7 @@
         <!-- /.box-header -->
     	<div class="box-body">
     		<!-- form start -->
-            <form role="form" method="POST" action="{{ url('admin/confluence/store') }}">
+            <form role="form" method="POST" action="{{ url('admin/question/store') }}">
             	@csrf
               	<div class="box-body">
                		<div class="form-group">
@@ -35,10 +35,6 @@
                 				<option value="{{ $theory->id }}">{{ $theory->name }}</option>
                 			@endforeach
                 		</select>
-                	</div>
-               		<div class="form-group">
-                  		<label>File</label>
-                  		<input type="file" class="form-control" id="" name="media">
                 	</div>
                		<div class="form-group">
                   		<label>Time Limit</label>

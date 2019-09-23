@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Diagnostic</b>TEST',
 
     'logo_mini' => '<b>A</b>LT',
 
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue',
+    'skin' => 'green',
 
     /*
     |--------------------------------------------------------------------------
@@ -134,46 +134,46 @@ return [
         ],
         ['header' => 'main_navigation'],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-file',
             'label'       => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'SETUP THEORY'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => ' Confluence',
+            'url'  => 'admin/confluence',
+            'icon' => 'fas fa-fw fa-sticky-note',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Theory',
+            'url'  => 'admin/theory',
+            'icon' => 'fas fa-fw fa-book',
         ],
         [
-            'text'    => 'Setup Theory',
-            'icon'    => 'fas fa-fw fa-setting',
-            'submenu' => [
-                [
-                    'text' => 'Confluence',
-                    'url'  => 'admin/confluence',
-                ],
-                [
-                    'text' => 'Theory',
-                    'url'  => 'admin/theory',
-                ],
-                [
-                    'text' => 'Question',
-                    'url'  => 'admin/question',
-                ],
-            ],
+            'text' => 'Question',
+            'url'  => 'admin/question',
+            'icon' => 'fas fa-fw fa-check-square',
         ],
+        // [
+        //     'text'    => '',
+        //     'icon'    => 'fas fa-fw fa-setting',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Confluence',
+        //             'url'  => 'admin/confluence',
+        //         ],
+        //         [
+        //             'text' => 'Theory',
+        //             'url'  => 'admin/theory',
+        //         ],
+        //         [
+        //             'text' => 'Question',
+        //             'url'  => 'admin/question',
+        //         ],
+        //     ],
+        // ],
     ],
 
     /*

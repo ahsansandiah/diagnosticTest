@@ -37,12 +37,15 @@
 		                	<td>{{ $question->created_at }}</td>
 		                	<td>{{ $question->updated_at }}</td>
 		                	<td>
-		                		<a class="btn btn-app" data-toggle="modal" data-target="#modal-edit{{ $question->id }}">
+		                		<a href="{{ url('admin/question/detail/'.$question->id) }}" class="btn btn-app">
+                                    <i class="fa fa-list-ul"></i> Detail
+                                </a>
+		                		{{-- <a class="btn btn-app" data-toggle="modal" data-target="#modal-edit{{ $question->id }}">
                                     <i class="fa fa-edit"></i> Edit
-                                </a>
-		                		<a href="{{ url('admin/confluence/delete'.'/'.$question->id) }}" class="btn btn-app">
+                                </a> --}}
+		                		{{-- <a href="{{ url('admin/confluence/delete'.'/'.$question->id) }}" class="btn btn-app">
                                     <i class="fa fa-trash"></i> Delete
-                                </a>
+                                </a> --}}
                             </td>
 		                </tr>
                 	@endforeach
