@@ -16,6 +16,7 @@ use Session;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Theory;
+use App\Models\Confluence;
 
 class QuestionController extends Controller
 {
@@ -33,15 +34,17 @@ class QuestionController extends Controller
     {
     	$questions = Question::paginate(20);
         $theories = Theory::all();
+        $confluences = Confluence::all();
 
-    	return view('contents.question.index', compact('questions', 'theories'));
+    	return view('contents.question.index', compact('questions', 'theories', 'confluences'));
     }
 
     public function create()
     {
         $theories = Theory::all();
+        $confluences = Confluence::all();
 
-        return view('contents.question.stepone', compact('theories'));
+        return view('contents.question.stepone', compact('theories', 'confluences'));
     }
 
     public function store(Request $request)
@@ -60,11 +63,21 @@ class QuestionController extends Controller
 
     public function storeStepTwo(Request $request)
     {
-        foreach ($request->answer as $value) {
-            $answer = new Answer();
-            $answer->question_id = $request->question_id;
-            $answer->answer = $value;            
-            $answer->save();
+        foreach ($request->answer as $keyAnswer => $value) {
+            foreach ($request->suggestion as $keySuggestion => $suggestion) {
+                if ($keySuggestion == $keyAnswer) {
+                     foreach ($request->diagnosa as $keyDiagnosa => $diagnosa) {
+                        if ($keyAnswer == $keyDiagnosa) {
+                            $answer = new Answer();
+                            $answer->question_id = $request->question_id;
+                            $answer->answer = $value;
+                            $answer->suggestion = $suggestion;
+                            $answer->diagnosa = $diagnosa;
+                            $answer->save();
+                        }
+                    }
+                }
+            }
         }
 
         return redirect('/admin/question/detail/'.$request->question_id)->with('status', 'Successfully created!');
@@ -74,8 +87,9 @@ class QuestionController extends Controller
     {
         $question = Question::with('answers', 'theory')->find($id);
         $theories = Theory::all();
+        $answerSort = ['A', 'B', 'C', 'D', 'E', 'G', 'H', 'I', 'J', 'K'];
 
-        return view('contents.question.detail', compact('question', 'theories'));
+        return view('contents.question.detail', compact('question', 'theories', 'answerSort'));
     }
 
     public function update(Request $request, $id)
@@ -94,7 +108,7 @@ class QuestionController extends Controller
 
     public function setStatusAnswer($idQuestion, $idAnswer, $status)
     {
-        $statusAnswer = Answer::setStatus($idAnswer, $status);
+        $statusAnswer = Answer::setStatus($idAnswer, $status, $idQuestion);
 
         return redirect('/admin/question/detail/'.$idQuestion)->with('status', 'Successfully created!');
     }
@@ -103,7 +117,9 @@ class QuestionController extends Controller
     {
         $answer = new Answer();
         $answer->question_id = $request->question_id;
-        $answer->answer = $request->answer;        
+        $answer->answer = $request->answer;
+        $answer->suggestion = $request->suggestion;
+        $answer->diagnosa = $request->diagnosa;
         $answer->save();
 
         return redirect('/admin/question/detail/'.$request->question_id)->with('status', 'Successfully created!');
@@ -112,7 +128,9 @@ class QuestionController extends Controller
     public function updateAnswer(Request $request, $idAnswer)
     {
         $answer = Answer::find($idAnswer);
+        $answer->suggestion = $request->suggestion;
         $answer->answer = $request->answer;
+        $answer->diagnosa = $request->diagnosa;
         $answer->update();
 
         return redirect('/admin/question/detail/'.$request->question_id)->with('status', 'Successfully created!');

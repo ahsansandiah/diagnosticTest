@@ -72,4 +72,17 @@ class ConfluenceController extends Controller
 
         return redirect('admin/confluence')->with('message', 'Successfully delete');
     }
+
+    public function setPassword(Request $request, $id)
+    {
+        $confluence = Confluence::find($id);
+        $confluence->password = $request->input('password');
+        $confluence->update();
+
+        if (!$confluence) {
+            return Redirect::back()->with('error_message', 'Failed set password');
+        }
+
+        return redirect('admin/confluence')->with('message', 'Successfully set password');        
+    }
 }

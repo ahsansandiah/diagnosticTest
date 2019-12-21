@@ -18,8 +18,12 @@ class CreateEvaluationTable extends Migration
             $table->unsignedInteger('student_id');
             $table->unsignedInteger('question_id');
             $table->unsignedInteger('answer_id');
+            $table->unsignedInteger('theory_id');
+            $table->unsignedInteger('confluence_id');
+            $table->boolean('correct')->default(false);
             $table->integer('score');
-            $table->time('score');
+            $table->string('package', 10);
+            $table->time('time');
             $table->timestamps();
             $table->softDeletes();
         });

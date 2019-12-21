@@ -164,6 +164,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         // JeroenNoten\LaravelCkEditor\ServiceProvider::class,
+        jeremykenedy\laravel2step\laravel2stepServiceProvider::class,
         /*
          * Package Service Providers...
          */

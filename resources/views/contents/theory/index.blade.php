@@ -9,7 +9,7 @@
 @section('content')
 	<div class="box">
         <div class="box-header">
-          <h3 class="box-title">Theory Data</h3>
+          <h3 class="box-title">Theory</h3>
           @yield('message')
           <div class="box-tools">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
@@ -29,15 +29,15 @@
 				            	@csrf
 				              	<div class="box-body">
 				               		<div class="form-group">
-				                  		<label for="exampleInputEmail1">Name</label>
+				                  		<label for="inputName">Name</label>
 				                  		<input type="text" class="form-control" id="" name="name" placeholder="Enter Theory Title">
 				                	</div>
 				                	<div class="form-group">
-				                  		<label for="exampleInputPassword1">Description</label>
-				                  		<input type="text" class="form-control" name="description" id="" placeholder="Enter Description">
+				                  		<label for="inputDescription">Description</label>
+				                  		<textarea class="form-control" name="description" id="" placeholder="Enter Description"></textarea>
 				                	</div>
 				                	<div class="form-group">
-				                  		<label for="exampleInputPassword1">Category</label>
+				                  		<label for="inputCategory">Category</label>
 				                		<select class="form-control" name="category_id">
 				                			@foreach($theoryCategories as $category)
 				                				<option value="{{ $category->id }}">{{ $category->category }}</option>
@@ -45,7 +45,7 @@
 				                		</select>
 				                	</div>
 				                	<div class="form-group">
-				                  		<label for="exampleInputPassword1">Confluence</label>
+				                  		<label for="inputConfluence">Confluence</label>
 				                		<select class="form-control" name="confluence_id">
 				                			@foreach($confluences as $confluence)
 				                				<option value="{{ $confluence->id }}">{{ $confluence->confluence }}</option>
@@ -98,6 +98,9 @@
 		                	<td>{{ $theory->created_at }}</td>
 		                	<td>{{ $theory->updated_at }}</td>
 		                	<td>
+		                		<a class="btn btn-app" href="{{ url('admin/theory/media/'.$theory->id) }}">
+                                    <i class="fa fa-file"></i> Media
+                                </a>
 		                		<a class="btn btn-app" data-toggle="modal" data-target="#modal-edit{{ $theory->id }}">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
@@ -115,15 +118,15 @@
 									            	@csrf
 									              	<div class="box-body">
 									               		<div class="form-group">
-									                  		<label for="exampleInputEmail1">Name</label>
+									                  		<label for="inputName">Name</label>
 									                  		<input type="text" class="form-control" id="" name="name" value={{ $theory->name }}>
 									                	</div>
 									                	<div class="form-group">
-									                  		<label for="exampleInputPassword1">Description</label>
-									                  		<input type="text" class="form-control" name="description" id="" value={{ $theory->description }}>
+									                  		<label for="inputDescription">Description</label>
+									                  		<textarea class="form-control" name="description">{{ $theory->description }}</textarea>
 									                	</div>
 									                	<div class="form-group">
-									                  		<label for="exampleInputPassword1">Category</label>
+									                  		<label for="inputCategory">Category</label>
 									                		<select class="form-control" name="category_id">
 									                			@foreach($theoryCategories as $category)
 									                				<option value="{{ $category->id }}">{{ $category->category }}</option>
@@ -131,7 +134,7 @@
 									                		</select>
 									                	</div>
 									                	<div class="form-group">
-									                  		<label for="exampleInputPassword1">Confluence</label>
+									                  		<label for="inputConfluence">Confluence</label>
 									                		<select class="form-control" name="confluence_id">
 									                			@foreach($confluences as $confluence)
 									                				<option value="{{ $confluence->id }}">{{ $confluence->confluence }}</option>
@@ -169,17 +172,17 @@
 @stop
 
 @section('css-pages')
-  <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> --}}
 @stop
 
 @section('js-pages')
 	<!-- DataTables -->
-	<script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+	{{-- <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> --}}
 
 	<script>
-	  $(function () {
-	    $('#example1').DataTable()
-	  })
+	  // $(function () {
+	  //   $('#example1').DataTable()
+	  // })
 	</script>
 @stop

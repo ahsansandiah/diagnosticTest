@@ -9,7 +9,7 @@
 @section('content')
 	<div class="box">
         <div class="box-header with-border">
-  			<blockquote><h3 class="box-title">{{ strip_tags($question->question) }}</h3></blockquote>
+  			<blockquote><h3 class="box-title">{!! $question->question !!}</h3></blockquote>
 		</div>
         <!-- /.box-header -->
     	<div class="box-body box-profile">
@@ -17,72 +17,94 @@
     			<h4><b>Detail</b></h4>
     			<ul class="list-group list-group-unbordered">
 	            	<li class="list-group-item" style="margin-bottom: 20px; margin-top: 21px;">
-	              		<b>Time</b> <a class="pull-right">{{ $question->time_limit }}</a>
+	              		<b>Time</b> <a class="pull-right">02:00</a>
 	            	</li>
 	            	<li class="list-group-item" style="margin-bottom: 20px; margin-top: 21px;">
 	              		<b>Score</b> <a class="pull-right">{{ $question->score }}</a>
 	            	</li>
-	            	<li class="list-group-item" style="margin-bottom: 20px; margin-top: 21px;">
-	              		<b>Theory</b> <a class="pull-right">{{ $question->theory->name }}</a>
-	            	</li>
 	          	</ul>
     		</div>
     		<div class="col-md-10">
-    			<h4><b>Answer</b></h4>
-    			<ul class="list-group list-group-unbordered">
-    				@foreach($question->answers as $answer)
-	            	<li class="list-group-item" style="margin-bottom: 20px; margin-top: 21px;">
-	              		<b>
-	    					{{ strip_tags($answer->answer) }}
-	              		</b> 
-	            	</li>
-                  	@if ($answer->correct == 1) 
-                  		<a href="{{ url('admin/question/'.$question->id.'/'.$answer->id.'/incorrect') }}" class="btn btn-success btn-flat"><i class="fa fa-check"></i></a>
-                  	@else 
-                  		<a href="{{ url('admin/question/'.$question->id.'/'.$answer->id.'/correct') }}" class="btn btn-danger btn-flat"><i class="fa fa-ban"></i></a>
-                  	@endif
-	                  	
-	                  	<a data-toggle="modal" data-target="#modal-default{{ $answer->id }}" class="btn btn-primary btn-flat"><i class="fa fa-edit"></i></a>
-	                  	<div class="modal fade" id="modal-default{{ $answer->id }}">
-				          	<div class="modal-dialog">
-				            	<div class="modal-content">
-				              		<div class="modal-header">
-				                		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				                  		<span aria-hidden="true">&times;</span></button>
-				                		<h4 class="modal-title">Edit Answer</h4>
-				              		</div>
-				              		<div class="modal-body">
-				                		<!-- form start -->
-										<form role="form" method="POST" action="{{ url('admin/question/answer/'.$answer->id.'/update') }}">
-											@csrf
-											<input type="hidden" name="question_id" value="{{ $question->id }}">
-											<div class="box-body">
-												<div class="form-group">
-													<label>Answer</label>
-													<textarea id="editAnswer{{ $answer->id }}" class="form-control" id="" name="answer"  rows="10" cols="80">{{ $answer->answer }}</textarea>
-												</div>
-												<div class="form-group" id="more_answer">
-												</div>
-											</div>
-											<!-- /.box-body -->
-											<div class="box-footer">
-												<button type="Submit" class="btn btn-primary">Submit</button>
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-											</div>
-										</form>
-				              		</div>
-				              		<div class="modal-footer">
-				              		</div>
-				            	</div>
-				            	<!-- /.modal-content -->
-				          	</div>
-				          	<!-- /.modal-dialog -->
-				        </div>
-				        <!-- /.modal -->
+    			{{-- <h4><b>Answer</b></h4> --}}
+				<div class="nav-tabs-custom">
+        			<ul class="nav nav-tabs">
+        				@foreach($question->answers as $key => $answer)
+	          				<li><a href="#{{$key}}" data-toggle="tab" aria-expanded="true">Answer {{ $answerSort[$key] }}</a></li>
+          				@endforeach
+        			</ul>
+        			<div class="tab-content">
+        				@foreach($question->answers as $key => $answer)
+	          				<div class="tab-pane" id="{{$key}}">
+	          					<b>
+			              			Answer
+			    					<blockquote><h4 class="box-title">{{ strip_tags($answer->answer) }}</h4></blockquote>
+			              		</b>
+			              		<b>
+			              			Diagnosa
+			    					<blockquote><h4 class="box-title">{{ strip_tags($answer->diagnosa) }}</h4></blockquote>
+			              		</b> 
+			              		<b>
+			              			Suggestion
+			    					<blockquote><h4 class="box-title">{{ strip_tags($answer->suggestion) }}</h4></blockquote>
+			              		</b>
+			                  	@if ($answer->correct == 1) 
+			                  		<a href="{{ url('admin/question/'.$question->id.'/'.$answer->id.'/incorrect') }}" class="btn btn-success btn-flat"><i class="fa fa-check"></i></a>
+			                  	@else 
+			                  		<a href="{{ url('admin/question/'.$question->id.'/'.$answer->id.'/correct') }}" class="btn btn-danger btn-flat"><i class="fa fa-ban"></i></a>
+			                  	@endif
+			                  	<a data-toggle="modal" data-target="#modal-default{{ $answer->id }}" class="btn btn-primary btn-flat"><i class="fa fa-edit"></i></a>
+			                  	<div class="modal fade" id="modal-default{{ $answer->id }}">
+						          	<div class="modal-dialog">
+						            	<div class="modal-content">
+						              		<div class="modal-header">
+						                		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						                  		<span aria-hidden="true">&times;</span></button>
+						                		<h4 class="modal-title">Edit Answer</h4>
+						              		</div>
+						              		<div class="modal-body">
+						                		<!-- form start -->
+												<form role="form" method="POST" action="{{ url('admin/question/answer/'.$answer->id.'/update') }}">
+													@csrf
+													<input type="hidden" name="question_id" value="{{ $question->id }}">
+													<div class="box-body">
+														<div class="form-group">
+															<label>Answer</label>
+															<textarea id="editAnswer{{ $answer->id }}" class="form-control" id="" name="answer"  rows="10" cols="80">{{ $answer->answer }}</textarea>
+														</div>
+														<div class="form-group">
+															<label>Suggestion</label>
+															<textarea id="editSuggestion{{ $answer->id }}" class="form-control" id="" name="suggestion"  rows="10" cols="80">{{ $answer->suggestion }}</textarea>
+														</div>
+														<div class="form-group">
+															<label>Diagnosa</label>
+															<textarea id="editDiagnosa{{ $answer->id }}" class="form-control" id="" name="diagnosa"  rows="10" cols="80">{{ $answer->diagnosa }}</textarea>
+														</div>
+														<div class="form-group" id="more_answer">
+														</div>
+													</div>
+													<!-- /.box-body -->
+													<div class="box-footer">
+														<button type="Submit" class="btn btn-primary">Submit</button>
+														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													</div>
+												</form>
+						              		</div>
+						              		<div class="modal-footer">
+						              		</div>
+						            	</div>
+						            	<!-- /.modal-content -->
+						          	</div>
+						          	<!-- /.modal-dialog -->
+						        </div>
+						        <!-- /.modal -->
 
-	                  	<a href="{{ url('admin/question/'.$question->id.'/answer/'.$answer->id.'/delete') }}" class="btn btn-danger btn-flat"><i class="fa fa-trash"></i></a>
-  					@endforeach
-	          	</ul>
+			                  	<a href="{{ url('admin/question/'.$question->id.'/answer/'.$answer->id.'/delete') }}" class="btn btn-danger btn-flat"><i class="fa fa-trash"></i></a>
+	          				</div>
+	         				<!-- /.tab-pane -->
+         				 @endforeach
+        			</div>
+       				 <!-- /.tab-content -->
+      			</div>
     		</div>
     	</div>
     	<div class="box-footer">
@@ -104,6 +126,14 @@
 									<div class="form-group">
 										<label>Answer</label>
 										<textarea id="addAnswer" class="form-control" id="" name="answer"  rows="10" cols="80"></textarea>
+									</div>
+									<div class="form-group">
+										<label>Suggestion</label>
+										<textarea id="addSuggestion" class="form-control" id="" name="suggestion"  rows="10" cols="80"></textarea>
+									</div>
+									<div class="form-group">
+										<label>Diagnosa</label>
+										<textarea id="addDiagnosa" class="form-control" id="" name="diagnosa"  rows="10" cols="80"></textarea>
 									</div>
 									<div class="form-group" id="more_answer">
 									</div>
@@ -217,6 +247,18 @@
 	  	})
 	  	$(function () {
 	    	// instance, using default configuration.
+	    	CKEDITOR.replace('addSuggestion')
+	    	//bootstrap WYSIHTML5 - text editor
+	    	$('.textarea').wysihtml5()
+	  	})
+	  	$(function () {
+	    	// instance, using default configuration.
+	    	CKEDITOR.replace('addDiagnosa')
+	    	//bootstrap WYSIHTML5 - text editor
+	    	$('.textarea').wysihtml5()
+	  	})
+	  	$(function () {
+	    	// instance, using default configuration.
 	    	CKEDITOR.replace('questionUpdate')
 	    	//bootstrap WYSIHTML5 - text editor
 	    	$('.textarea').wysihtml5()
@@ -232,6 +274,18 @@
     		$(function () {
 		    	// instance, using default configuration.
 		    	CKEDITOR.replace('editAnswer{{ $answer->id }}')
+		    	//bootstrap WYSIHTML5 - text editor
+		    	$('.textarea').wysihtml5()
+		  	})
+    		$(function () {
+		    	// instance, using default configuration.
+		    	CKEDITOR.replace('editSuggestion{{ $answer->id }}')
+		    	//bootstrap WYSIHTML5 - text editor
+		    	$('.textarea').wysihtml5()
+		  	})
+    		$(function () {
+		    	// instance, using default configuration.
+		    	CKEDITOR.replace('editDiagnosa{{ $answer->id }}')
 		    	//bootstrap WYSIHTML5 - text editor
 		    	$('.textarea').wysihtml5()
 		  	})

@@ -132,14 +132,6 @@ return [
             'text' => 'search',
             'search' => true,
         ],
-        ['header' => 'main_navigation'],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
         ['header' => 'SETUP THEORY'],
         [
             'text' => ' Confluence',
@@ -148,7 +140,7 @@ return [
         ],
         [
             'text' => 'Theory',
-            'url'  => 'admin/theory',
+            'url'  => 'admin/theory/files',
             'icon' => 'fas fa-fw fa-book',
         ],
         [
@@ -156,24 +148,77 @@ return [
             'url'  => 'admin/question',
             'icon' => 'fas fa-fw fa-check-square',
         ],
+        [
+            'text'    => 'Evaluation',
+            'icon'    => 'fas fa-fw fa-sticky-note',
+            'submenu' => [
+                [
+                    'text' => 'Diagnostic',
+                    'url'  => 'admin/evaluation/diagnostic',
+                    'icon' => 'fas fa-fw fa-sticky-note',
+
+                ],
+                [
+                    'text' => 'Formative',
+                    'url'  => 'admin/evaluation/formative',
+                    'icon' => 'fas fa-fw fa-sticky-note',
+
+                ],
+            ],
+        ],
         // [
-        //     'text'    => '',
-        //     'icon'    => 'fas fa-fw fa-setting',
+        //     'text'    => 'Media',
+        //     'icon'    => 'fas fa-fw fa-cog',
         //     'submenu' => [
         //         [
-        //             'text' => 'Confluence',
-        //             'url'  => 'admin/confluence',
+        //             'text' => 'Image',
+        //             'url'  => 'admin/media/image',
+        //             'icon' => 'fas fa-fw fa-image',
+
         //         ],
         //         [
-        //             'text' => 'Theory',
-        //             'url'  => 'admin/theory',
+        //             'text' => 'File',
+        //             'url'  => 'admin/media/file',
+        //             'icon' => 'fas fa-fw fa-file-word',
+
         //         ],
         //         [
-        //             'text' => 'Question',
-        //             'url'  => 'admin/question',
+        //             'text' => 'Video Termodinamika',
+        //             'url'  => 'admin/media/video',
+        //             'icon' => 'fas fa-fw fa-video',
+
         //         ],
         //     ],
         // ],
+        [
+            'text'    => 'Other',
+            'icon'    => 'fas fa-fw fa-cog',
+            'submenu' => [
+                [
+                    'text' => 'Profile',
+                    'url'  => 'admin/profile',
+                    'icon' => 'fas fa-fw fa-users',
+
+                ],
+                [
+                    'text' => 'KI and KD',
+                    'url'  => 'admin/ki-and-kd',
+                    'icon' => 'fas fa-fw fa-users',
+
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Users',
+            'icon'    => 'fas fa-fw fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Student',
+                    'url'  => 'admin/student',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+            ],
+        ],
     ],
 
     /*

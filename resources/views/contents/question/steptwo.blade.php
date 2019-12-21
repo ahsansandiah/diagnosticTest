@@ -25,6 +25,14 @@
 						<label>Answer</label>
 						<textarea id="editor1" class="form-control" id="" name="answer[]"  rows="10" cols="80"></textarea>
 					</div>
+					<div class="form-group">
+						<label>Suggestion</label>
+						<textarea id="editorSuggest1" class="form-control" id="" name="suggestion[]"  rows="10" cols="80"></textarea>
+					</div>
+					<div class="form-group">
+						<label>Diagnosa</label>
+						<textarea id="editorDiagnosa1" class="form-control" id="" name="diagnosa[]"  rows="10" cols="80"></textarea>
+					</div>
 					<div class="form-group" id="more_answer">
 					</div>
 				</div>
@@ -51,15 +59,43 @@
 			$('#add_more').click(function() {
                 i++;
                 $('#more_answer').append(
+                	'<br>'+
                 	'<div id="inputAnswer'+i+'">'+
 	                	'<label>Answer '+ i +'</label>'+
-						'<textarea id="editor'+i+'" class="form-control" name="answer[]"  rows="10" cols="80"></textarea>' +	
-						'<p></p><button type="button" id="' + i + '" class="btn btn-danger btn-remove">Remove</button>'+
+						'<textarea id="editor'+i+'" class="form-control" name="answer[]"  rows="10" cols="80"></textarea>' +
+						'<p></p>'+
+						'<label>Suggestion '+ i +'</label>'+
+						'<textarea id="editorSuggest'+i+'" class="form-control" name="suggestion[]"  rows="10" cols="80"></textarea>' +	
+						'<p></p>'+
+						'<label>Diagnosa '+ i +'</label>'+
+						'<textarea id="editorDiagnosa'+i+'" class="form-control" name="diagnosa[]"  rows="10" cols="80"></textarea>' +	
+						'<p></p><button type="button" id="' + i + '" class="btn btn-danger btn-remove">Remove</button>'+	
 					'</div>'
                 );
                 $(document).on('click', '.btn-remove', function() {
 					var button_id = $(this).attr("id");
 					$('#inputAnswer' + button_id + '').remove();
+				});
+				$(function () {
+					// Replace the <textarea id="editor1"> with a CKEditor
+					// instance, using default configuration.
+					CKEDITOR.replace('editor'+i)
+					//bootstrap WYSIHTML5 - text editor
+					$('.textarea').wysihtml5()
+				});
+				$(function () {
+					// Replace the <textarea id="editor1"> with a CKEditor
+					// instance, using default configuration.
+					CKEDITOR.replace('editorSuggest'+i)
+					//bootstrap WYSIHTML5 - text editor
+					$('.textarea').wysihtml5()
+				});
+				$(function () {
+					// Replace the <textarea id="editor1"> with a CKEditor
+					// instance, using default configuration.
+					CKEDITOR.replace('editorDiagnosa'+i)
+					//bootstrap WYSIHTML5 - text editor
+					$('.textarea').wysihtml5()
 				});
             });
 		})
@@ -80,7 +116,14 @@
 		$(function () {
 			// Replace the <textarea id="editor1"> with a CKEditor
 			// instance, using default configuration.
-			CKEDITOR.replace('editor2')
+			CKEDITOR.replace('editorSuggest1')
+			//bootstrap WYSIHTML5 - text editor
+			$('.textarea').wysihtml5()
+		})
+		$(function () {
+			// Replace the <textarea id="editor1"> with a CKEditor
+			// instance, using default configuration.
+			CKEDITOR.replace('editorDiagnosa1')
 			//bootstrap WYSIHTML5 - text editor
 			$('.textarea').wysihtml5()
 		})

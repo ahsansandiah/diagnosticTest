@@ -11,6 +11,7 @@ class Theory extends Model
 
     protected $table = "theory";
     protected $guarded = [];
+    // protected $with = ['confluence'];
 
     public function category()
     {
@@ -19,6 +20,6 @@ class Theory extends Model
 
     public function confluence()
     {
-        return $this->hasOne('App\Models\Confluence', 'id', 'confluence_id');
+        return $this->belongsTo('App\Models\Confluence', 'confluence_id', 'id');
     }
 }

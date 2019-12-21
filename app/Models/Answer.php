@@ -12,9 +12,9 @@ class Answer extends Model
     protected $table = "answer";
     protected $guarded = [];
 
-    public static function setStatus($id, $status)
+    public static function setStatus($id, $status, $questionId)
     {
-        $answer = Answer::where('correct', '1')->whereNotIn('id', [$id])->first();
+        $answer = Answer::where('correct', '1')->where('question_id', $questionId)->whereNotIn('id', [$id])->first();
         if ($answer) {
             $answer->correct = 0;
             $answer->update();

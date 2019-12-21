@@ -9,7 +9,6 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
     
 	@yield('js-pages')
 @stop

@@ -36,6 +36,12 @@
 				                  		<label for="exampleInputPassword1">Order</label>
 				                  		<input type="numeric" class="form-control" name="order" id="" placeholder="Enter">
 				                	</div>
+				                	<div class="form-group">
+				                  		<select class="form-control" name="type">
+				                  			<option value="formative">Formative</option>
+				                  			<option value="diagnostic">Diagnostic</option>
+				                  		</select>
+				                	</div>
 				              	</div>
 				              	<!-- /.box-body -->
 				              	<div class="box-footer">
@@ -76,6 +82,46 @@
 		                	<td>{{ $confluence->created_at }}</td>
 		                	<td>{{ $confluence->updated_at }}</td>
 		                	<td>
+		                		{{-- <a class="btn btn-app" data-toggle="modal" data-target="#modal-password{{ $confluence->id }}">
+                                    <i class="fa fa-file-pdf-o"></i> Media
+                                </a> --}}
+		                		<a class="btn btn-app" data-toggle="modal" data-target="#modal-password{{ $confluence->id }}">
+                                    <i class="fa fa-key"></i> Password
+                                </a>
+                                <div class="modal fade" id="modal-password{{ $confluence->id }}">
+					          		<div class="modal-dialog">
+					            		<div class="modal-content">
+					              			<div class="modal-header">
+					                			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					                  			<span aria-hidden="true">&times;</span></button>
+					                			<h4 class="modal-title">Set Password</h4>
+					              			</div>
+					              			<div class="modal-body">
+					                			<!-- form start -->
+									            <form method="POST" action="{{ url('admin/confluence/set-password/'.$confluence->id) }}">
+									            	@csrf
+									              	<div class="box-body">
+									               		<div class="form-group">
+									                  		<label for="inputPassword">Password</label>
+									                  		<input type="text" class="form-control" id="" name="password" value="{{ $confluence->password }}">
+									                	</div>
+									              	</div>
+									              	<!-- /.box-body -->
+									              	<div class="box-footer">
+									                	<button type="submit" class="btn btn-primary">Submit</button>
+									                	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									              	</div>
+									            </form>
+					              			</div>
+						              		<div class="modal-footer">
+						                		{{-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+						                		<button type="button" class="btn btn-primary">Save changes</button> --}}
+						              		</div>
+					            		</div>
+					            		<!-- /.modal-content -->
+					          		</div>
+					          		<!-- /.modal-dialog -->
+					        	</div>
 		                		<a class="btn btn-app" data-toggle="modal" data-target="#modal-edit{{ $confluence->id }}">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
@@ -85,7 +131,7 @@
 					              			<div class="modal-header">
 					                			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					                  			<span aria-hidden="true">&times;</span></button>
-					                			<h4 class="modal-title">Create Confluence</h4>
+					                			<h4 class="modal-title">Edit Confluence</h4>
 					              			</div>
 					              			<div class="modal-body">
 					                			<!-- form start -->
@@ -99,6 +145,12 @@
 									                	<div class="form-group">
 									                  		<label for="exampleInputPassword1">Order</label>
 									                  		<input type="numeric" class="form-control" name="order" id=""  value="{{ $confluence->order }}">
+									                	</div>
+									                	<div class="form-group">
+									                  		<select class="form-control" name="type">
+									                  			<option value="formative" {{ ($confluence->type == 'formative') ? 'selected' : ''}}>Formative</option>
+									                  			<option value="diagnostic" {{ ($confluence->type == 'diagnostic') ? 'selected' : ''}}>Diagnostic</option>
+									                  		</select>
 									                	</div>
 									              	</div>
 									              	<!-- /.box-body -->
@@ -131,17 +183,17 @@
 @stop
 
 @section('css-pages')
-  <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> --}}
 @stop
 
 @section('js-pages')
 	<!-- DataTables -->
-	<script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+	{{-- <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script> --}}
+	{{-- <script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> --}}
 
 	<script>
-	  $(function () {
-	    $('#example1').DataTable()
-	  })
+	  // $(function () {
+	  //   $('#example1').DataTable()
+	  // })
 	</script>
 @stop
