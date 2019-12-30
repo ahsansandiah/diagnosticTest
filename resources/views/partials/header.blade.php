@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a href="{{ url('/') }}" class="navbar-brand"><b style="color: #252323;">SYSDIAG</b></a>
+				<a href="{{ url('/') }}" class="navbar-brand"><b style="color: #4492bf;">Diagnostic Online Website of Physics</b></a>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
 					<i class="fa fa-bars"></i>
 				</button>
@@ -66,6 +66,9 @@
 			                </li>
 		              	</ul>
 	            	</li>
+					<li>
+						<img class="img-circle" src="{{ asset('/logo_uny.png') }}" alt="Logo UNY" style="width: 40px; margin-top: 5px;">	
+					</li>
 	         	</ul>
 			</div>
 			<!-- /.navbar-custom-menu -->

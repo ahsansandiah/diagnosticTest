@@ -9,24 +9,21 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-12">
-          	<!-- Widget: user widget style 1 -->
-          	<div class="box box-widget widget-user">
-            	<!-- Add the bg color to the header using any of the bg-* classes -->
-            	<div class="widget-user-header bg-black" style="background: url({{ asset('bg1.jpg') }}) center center;">
-              		<h3 class="widget-user-username">SYSTEM DIAGNOSTIC AND FORMATIVE TEST</h3>
-              		<h5 class="widget-user-desc">TEAM A</h5>
-            	</div>
-            	<div class="widget-user-image">
-              		{{-- <img class="img-circle" src="../dist/img/user3-128x128.jpg" alt="User Avatar"> --}}
-            	</div>
-            	<div class="box-footer">
-              		<div class="row">
-              		</div>
-              		<!-- /.row -->
-            	</div>
-          	</div>
-          	<!-- /.widget-user -->
-        </div>
+			<!-- Widget: user widget style 1 -->
+			<div class="box box-widget widget-user">
+				<!-- Add the bg color to the header using any of the bg-* classes -->
+				<div class="widget-user-header bg-blue">
+					<h3 class="widget-user-username" align="center" style="text-shadow: 0 2px 0px rgba(21, 20, 20, 0.2);">Diagnostic Online Website of Physics</h3>
+					<h3 class="widget-user-username" align="center" style="text-shadow: 0 2px 0px rgba(21, 20, 20, 0.2);">(DOW)</h3>
+				</div>
+				<div class="box-footer" style="background: url({{ asset('bg1.jpg') }}) center center;">
+					<div class="row">
+					</div>
+					<!-- /.row -->
+				</div>
+			</div>
+			<!-- /.widget-user -->
+		</div>
 	</div>
 @stop
 

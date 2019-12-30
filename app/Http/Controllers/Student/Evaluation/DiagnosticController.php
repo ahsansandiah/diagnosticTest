@@ -56,7 +56,7 @@ class DiagnosticController extends Controller
 								->first();
 
 		if (is_null($confluence)) {
-			return redirect('/evaluation/diagnostic')->with('error_message', 'Failed, Password is wrong!');
+			return redirect('/evaluation/diagnostic')->with('error_message', 'Gagal! Password yang anda masukkan salah!');
 		}
 
 		$evaluationStatus = (new EvaluationStatus)->isDone($user->id, 'diagnostic', $confluence->id);

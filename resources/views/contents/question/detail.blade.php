@@ -37,15 +37,15 @@
 	          				<div class="tab-pane" id="{{$key}}">
 	          					<b>
 			              			Answer
-			    					<blockquote><h4 class="box-title">{{ strip_tags($answer->answer) }}</h4></blockquote>
+			    					<blockquote><h4 class="box-title">{!! $answer->answer !!}</h4></blockquote>
 			              		</b>
 			              		<b>
 			              			Diagnosa
-			    					<blockquote><h4 class="box-title">{{ strip_tags($answer->diagnosa) }}</h4></blockquote>
+			    					<blockquote><h4 class="box-title">{!! $answer->diagnosa !!}</h4></blockquote>
 			              		</b> 
 			              		<b>
 			              			Suggestion
-			    					<blockquote><h4 class="box-title">{{ strip_tags($answer->suggestion) }}</h4></blockquote>
+			    					<blockquote><h4 class="box-title">{!! $answer->suggestion !!}</h4></blockquote>
 			              		</b>
 			                  	@if ($answer->correct == 1) 
 			                  		<a href="{{ url('admin/question/'.$question->id.'/'.$answer->id.'/incorrect') }}" class="btn btn-success btn-flat"><i class="fa fa-check"></i></a>

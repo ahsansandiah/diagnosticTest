@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>SYSDIAG</title>
+		<title>Diagnostic Online Website of Physics</title>
 		<!-- Tell the browser to be responsive to screen width -->
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 		@include('partials.css')
@@ -44,7 +44,7 @@
       				<div class="pull-right hidden-xs">
         				<b>Version</b> 1.0
       				</div>
-      				<strong>Copyright &copy; 2019 <a href="https://adminlte.io">SYSDIAG</a>.</strong> All rights reserved.
+      				<strong>Copyright &copy; 2019 <a href="#">Diagnostic Online Website of Physics</a>.</strong> All rights reserved.
     			</div>
     			<!-- /.container -->
   			</footer>
