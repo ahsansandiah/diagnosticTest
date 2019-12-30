@@ -8,6 +8,12 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    <div>
+                        <center>
+                            <img class="img-circle" src="{{ asset('/logo_uny.png') }}" alt="Logo UNY" class="img-circle" style="width: 100px;margin-top: 5px;margin-bottom: 23px;">
+                            
+                        </center>
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'Diagnostic Online Website of Physics',
 
     'title_prefix' => '',
 
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>DOW of Physics</b>',
+    'logo' => '<b><h5>Diagnostic Online Website <br>of Physics</h5></b>',
 
     'logo_mini' => '<b>D</b>OW',
 
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 

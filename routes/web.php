@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() { 
-	Route::get('/admin/dashboard', 'HomeController@index')->name('dashboard');
+	Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 	Route::get('/', 'HomeController@index')->name('dashboard');
 
 	Route::group(['prefix' => 'confluence'], function() { 
