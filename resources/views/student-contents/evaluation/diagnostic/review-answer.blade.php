@@ -28,18 +28,19 @@
                 <div class="timeline-item">
                     <div class="timeline-header">
                         <div class="callout callout-success">
-                            <h5>{{ strip_tags($evaluation->question->question) }}</h5>
+                            <h5>{!! $evaluation->question->question !!}</h5>
                         </div>
                     </div>
                     <div class="timeline-body">
                         <dl class="dl-horizontal">
                             <dt>Jawaban</dt>
-                            <dd>{{ strip_tags($evaluation->answer->answer) }}</dd>
+                            <dd>{!! $evaluation->answer->answer !!}</dd>
+                            <br>
+                            <dt>Diagnosa</dt>
+                            <dd>{!! $evaluation->answer->diagnosa !!}</dd>
                             <br>
                             <dt>Saran</dt>
-                            <dd>{{ strip_tags($evaluation->answer->suggestion) }}</dd>
-                            <dt>Diagnosa</dt>
-                            <dd>{{ strip_tags($evaluation->answer->diagnosa) }}</dd>
+                            <dd>{!! $evaluation->answer->suggestion !!}</dd>
                         </dl>
                         <hr>
                         <form method="get" action="{{ url('evaluation/diagnostic/'.$confluenceName) }}">

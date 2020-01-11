@@ -79,7 +79,7 @@ class FormativeController extends Controller
 
 		$question = Question::with(['answers', 'theory'])
 					->where('confluence_id', $confluenceId)
-					->where('order', $nextQuestion)->first();
+					->where('order', $nextQuestion)->orderBy('order', 'asc')->first();
 
 		return $question;
 	}

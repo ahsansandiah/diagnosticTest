@@ -35,7 +35,7 @@
                         <br>
                         <br>
                         <div class="callout callout-success">
-                            <h5>{{ strip_tags($question->question) }}</h5>
+                            <h5>{!! $question->question !!}</h5>
                         </div>
                     </div>
                     <div class="timeline-body">
@@ -56,7 +56,7 @@
                                             <td>
                                                 <input type="radio" name="answer_id" id="optionsRadiosAnswer" value="{{ $answer->id}}" checked="">
                                             </td>
-                                            <td>{{ strip_tags($answer->answer) }}</td>
+                                            <td>{!! $answer->answer !!}</td>
                                         </tr>
                                     @endforeach
                                     <tr>

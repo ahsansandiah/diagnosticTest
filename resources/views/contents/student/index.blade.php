@@ -42,7 +42,7 @@
 						                	</div>
 						                	<div class="form-group">
 						                  		<label for="">Birthday</label>
-						                  		<input type="text" class="form-control" id="" name="birthday"">
+						                  		<input type="text" class="form-control" id="datepicker" name="birthday">
 						                	</div>
 						                	<div class="form-group">
 						                  		<label for="">Birthday Place</label>
@@ -65,6 +65,15 @@
 				</div>
 
 				<div class="box-body box-profile">
+					@if ($errors->any())
+					    <div class="alert alert-danger">
+					        <ul>
+					            @foreach ($errors->all() as $error)
+					                <li>{{ $error }}</li>
+					            @endforeach
+					        </ul>
+					    </div>
+					@endif
 					<table class="table table-bordered">
 		                <tbody>
 		                	<tr>
@@ -111,7 +120,7 @@
 											                	</div>
 											                	<div class="form-group">
 											                  		<label for="">Birthday</label>
-											                  		<input type="text" class="form-control" id="" name="birthday" value="{{ $student->birthday }}">
+											                  		<input type="text" class="form-control" id="datepicker{{ $student->id }}" name="birthday" value="{{ $student->birthday }}">
 											                	</div>
 											                	<div class="form-group">
 											                  		<label for="">Birthday Place</label>
@@ -152,7 +161,7 @@
 											              	<div class="box-body">
 											               		<div class="form-group">
 											                  		<label for="">New Passowrd</label>
-											                  		<input type="text" class="form-control" id="" name="passowrd">
+											                  		<input type="text" class="form-control" id="" name="password">
 											                	</div>
 											                	<div class="form-group">
 											                  		<label for="">Confirmation Password</label>
@@ -191,7 +200,23 @@
 @stop
 
 @section('css-pages')
+	<link rel="stylesheet" src="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
 @stop
 
 @section('js-pages')
+	<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+	<script type="text/javascript">
+		//Date picker
+	    $('#datepicker').datepicker({
+	    	format: 'yyyy-mm-dd',
+	      	autoclose: true
+	    })
+
+	    @foreach($students as $key => $student)
+		    $('#datepicker{{ $student->id }}').datepicker({
+		    	format: 'yyyy-mm-dd',
+		      	autoclose: true
+		    })
+		@endforeach
+	</script>
 @stop

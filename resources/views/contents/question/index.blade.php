@@ -33,7 +33,7 @@
                 	@foreach ($questions as $index => $question)
 	                	<tr>
 		                	<td>{{ $index+1 }}</td>
-		                	<td>{{ strip_tags($question->question) }}</td>
+		                	<td>{!! $question->question !!}</td>
 		                	<td>{{ $question->created_at }}</td>
 		                	<td>{{ $question->updated_at }}</td>
 		                	<td>

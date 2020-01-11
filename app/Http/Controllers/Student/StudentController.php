@@ -28,6 +28,10 @@ class StudentController extends Controller
 
 	public function store(Request $request)
 	{
+		$validatedData = $request->validate([
+	        'email' => 'required|unique:student|unique:users',
+	    ]);
+
 		$user = new User;
 		$user->email = $request->email;
 		$user->name = $request->name;
@@ -64,7 +68,7 @@ class StudentController extends Controller
 	public function resetPassword(Request $request, $id)
 	{
 		$user = User::find($id);
-		$user->password = Hash::make('student123');
+		$user->password = Hash::make($request->password);
 		$user->update();
 
 		return redirect('/admin/student')->with('status', 'Successfully updated password!');
@@ -73,6 +77,10 @@ class StudentController extends Controller
 	public function destroy($id)
 	{
 		$student = Student::findOrFail($id);
+
+		$user = User::findOrFail($student->user_id);
+		$user->delete();
+
 		$student->delete();
 
 		return redirect('/admin/student')->with('status', 'Successfully deleted!');

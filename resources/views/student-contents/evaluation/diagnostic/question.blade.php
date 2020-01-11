@@ -55,7 +55,7 @@
                                             <td>
                                                 <input type="radio" name="answer_id" id="optionsRadiosAnswer" value="{{ $answer->id}}" checked="">
                                             </td>
-                                            <td>{{ strip_tags($answer->answer) }}</td>
+                                            <td>{!! $answer->answer !!}</td>
                                         </tr>
                                     @endforeach
                                     <tr>

@@ -32,7 +32,7 @@ class QuestionController extends Controller
 
     public function index()
     {
-    	$questions = Question::paginate(20);
+    	$questions = Question::get();
         $theories = Theory::all();
         $confluences = Confluence::all();
 

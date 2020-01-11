@@ -36,10 +36,11 @@
                             <dt>Jawaban</dt>
                             <dd>{!! $evaluation->answer->answer !!}</dd>
                             <br>
-                            <dt>Saran</dt>
-                            <dd>{!! $evaluation->answer->suggestion !!}</dd>
                             <dt>Diagnosa</dt>
                             <dd>{!! $evaluation->answer->diagnosa !!}</dd>
+                            <br>
+                            <dt>Saran</dt>
+                            <dd>{!! $evaluation->answer->suggestion !!}</dd>
                         </dl>
                         <hr>
                         <form method="get" action="{{ url('evaluation/formative') }}">

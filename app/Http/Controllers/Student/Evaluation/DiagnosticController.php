@@ -87,8 +87,7 @@ class DiagnosticController extends Controller
 			$query->where('order', $nextQuestion);
 		}
 		
-		$question = $query->where('confluence_id', $confluence->id)
-			->first();
+		$question = $query->where('confluence_id', $confluence->id)->orderBy('order', 'asc')->first();
 
 		if (is_null($question)) {
 			if (is_null($request->last_question)) {

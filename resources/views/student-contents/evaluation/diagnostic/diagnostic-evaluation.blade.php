@@ -29,7 +29,7 @@
                             <h3 class="pull-right"><b>Waktu :</b> <b class="countdown"></b></h3>
                             <hr>
                             <p><b>Pertanyaan</b></p>
-                            <p>{{ strip_tags($value->question) }}</p>
+                            <p>{!! $value->question !!}</p>
                             <p><input type="text" name="question_id" id="question" value="{{ $value->id }}"></p>
                             <hr>
                             <p><b>Jawaban</b></p>
@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="answer" id="answer" value="{{ $answer->id }}" checked="">{{ strip_tags($answer->answer) }}
+                                            <input type="radio" name="answer" id="answer" value="{{ $answer->id }}" checked="">{!! $answer->answer !!}
                                         </label>
                                     </div>
                                 </div>
