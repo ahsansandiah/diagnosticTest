@@ -20,7 +20,7 @@
 	  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	</head>
 	<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-	<body class="hold-transition skin-blue layout-top-nav">
+	<body class="skin-blue layout-top-nav" data-gr-c-s-loaded="true" style="height: auto; min-height: 100%;">
 		<div class="wrapper">
 			@include('partials.header')
 			<div class="content-wrapper">

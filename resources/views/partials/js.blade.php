@@ -9,4 +9,4 @@
 <!-- AdminLTE App -->
 <script src="{{asset('vendor/adminlte/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-{{-- <script src="{{asset('vendor/adminlte/dist/js/demo.js')}}"></script> --}}
+<script src="{{asset('vendor/adminlte/dist/js/demo.js')}}"></script>
