@@ -24,53 +24,47 @@ use App\Models\Question;
 use App\Models\Answer;
 use App\Models\TheoryMedia;
 
-class FormativeController extends Controller
+class PreTestController extends Controller
 {
 	const BASE_VIEW_URL_PATH = 'student-contents.evaluation.formative';
 	const FORMATIVE_CATEGORY = 2;
 
-	public function introduction($testKey)
+	public function introduction()
 	{
-		$testCategory = ($testKey == 'posttest') ? 'Post-Test' : 'Pre-Test';
-		return view($this::BASE_VIEW_URL_PATH.'.first', compact('testCategory', 'testKey'));
+		return view($this::BASE_VIEW_URL_PATH.'.first');
 	}
 
-	public function index(Request $request, $testKey)
+	public function index(Request $request)
 	{
 		$user = Auth::user();
-		$testCategory = ($testKey == 'posttest') ? 'Post-Test' : 'Pre-Test';
 		$student = $user->student;
 		if (is_null($student)){
-			return redirect('/evaluation/'.$testKey.'/introduction')->with('error_message', 'Maaf, Anda tidak terdaftar sebagai siswa');
+			return redirect('/evaluation/formative/introduction')->with('error_message', 'Maaf, Anda tidak terdaftar sebagai siswa');
 		}
 
 		$theory = Theory::where('category_id', $this::FORMATIVE_CATEGORY)->first();
-		$confluence = Confluence::where('type', $testKey)->first();
-		if (is_null($confluence)){
-			return redirect('/evaluation/'.$testKey.'/introduction')->with('error_message', 'Maaf, '.$testCategory.' Belum Tersedia');
-		}
-
+		$confluence = Confluence::where('type', 'pretest')->first();
 		$question = $this->question($request->last_question, $confluence->id);
 
-		$evaluationStatus = (new EvaluationStatus)->isDone($user->id, $testKey, null);
+		$evaluationStatus = (new EvaluationStatus)->isDone($user->id, 'pretest', null);
 		if ($evaluationStatus ) {
-			return redirect('/evaluation/'.$testKey.'/result')->with('error_message', 'Anda telah menyelesaikan test');
+			return redirect('/evaluation/formative/result')->with('error_message', 'Anda telah menyelesaikan test');
 		}
 
-		$evaluations = Evaluation::where('type','posttest')->where('student_id', $student->id)->count();
+		$evaluations = Evaluation::where('type','pretest')->where('student_id', $student->id)->count();
 		if ($evaluations > 0 && is_null($question)) {
 			$evaluationStatus = new EvaluationStatus;
 			$evaluationStatus->user_id = $user->id;
-			$evaluationStatus->type = $testKey;
+			$evaluationStatus->type = 'pretest';
 			$evaluationStatus->status = 'done';
 			$evaluationStatus->confluence_id = $confluence->id;
 			$evaluationStatus->save();
 
-			return redirect('/evaluation/'.$testKey.'/result')->with('message', 'Anda telah menyelesaikan semua test');
+			return redirect('/evaluation/formative/result')->with('message', 'Anda telah menyelesaikan semua test');
 		}
 
 		if (is_null($question)) {
-			return redirect('/evaluation/'.$testKey.'/result')->with('error_message', 'Maaf, Test belum tersedia');
+			return redirect('/evaluation/formative/result')->with('error_message', 'Maaf, Test belum tersedia');
 		}
 
 		return view($this::BASE_VIEW_URL_PATH.'.index', compact('theory', 'question'));
@@ -107,7 +101,7 @@ class FormativeController extends Controller
 		];
 	}
 
-	public function store(Request $request, $testKey)
+	public function store(Request $request)
 	{
 		$user = Auth::user();
 		$question = Question::find($request->question_id);
@@ -124,10 +118,10 @@ class FormativeController extends Controller
 		$studentEvaluation->correct = $answer->correct;
 		$studentEvaluation->package = $question->package;
 		$studentEvaluation->time = $request->time_limit;
-		$studentEvaluation->type = $testKey;
+		$studentEvaluation->type = 'pretest';
 		$studentEvaluation->save();
 		
-		return redirect('/evaluation/'.$testKey.'/'.$studentEvaluation->id.'/review');
+		return redirect('/evaluation/formative/'.$studentEvaluation->id.'/review');
 	}
 
 	public function review($evaluationId)
@@ -138,12 +132,12 @@ class FormativeController extends Controller
 		return view($this::BASE_VIEW_URL_PATH.'.review', compact('evaluation', 'filesTheory'));
 	}
 
-	public function result($testKey)
+	public function result()
 	{
 		$user = Auth::user();
 		$student = $user->student;
 
-		$evaluation = (new Evaluation)->getResultByUser($student,null,$testKey);
+		$evaluation = (new Evaluation)->getResultByUser($student,null,'pretest');
 		return view($this::BASE_VIEW_URL_PATH.'.result', compact('evaluation'));
 	}
 }

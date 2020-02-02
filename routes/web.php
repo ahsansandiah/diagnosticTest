@@ -112,6 +112,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 		Route::get('/delete/{studentId}', 'Student\StudentController@destroy')->name('student.delete');
 		Route::post('/{userId}/reset-password', 'Student\StudentController@resetPassword')->name('student.reset-password');
 	});
+
+	Route::group(['prefix' => 'report'], function() { 
+		Route::get('/by-confluence', 'Report\ReportController@getByConfluence')->name('report.question');
+	});
 });
 
 
@@ -132,13 +136,11 @@ Route::group(['prefix' => '/evaluation'], function() {
 		Route::get('/result/{confluenceId}', 'Student\Evaluation\DiagnosticController@result')->name('diagnostic.result');
 	});
 
-	Route::group(['prefix' => '/formative'], function() {
-		Route::get('/introduction', 'Student\Evaluation\FormativeController@introduction')->name('introduction');
-		Route::get('/', 'Student\Evaluation\FormativeController@index')->name('index');
-		Route::post('/submit', 'Student\Evaluation\FormativeController@store')->name('store');
-		Route::get('/{evaluationId}/review', 'Student\Evaluation\FormativeController@review')->name('review');
-		Route::get('/result', 'Student\Evaluation\FormativeController@result')->name('result');
-	});
+	Route::get('/{test}/introduction', 'Student\Evaluation\FormativeController@introduction')->name('introduction');
+	Route::get('/{test}/', 'Student\Evaluation\FormativeController@index')->name('index');
+	Route::post('/{test}/submit', 'Student\Evaluation\FormativeController@store')->name('store');
+	Route::get('/{test}/{evaluationId}/review', 'Student\Evaluation\FormativeController@review')->name('review');
+	Route::get('/{test}/result', 'Student\Evaluation\FormativeController@result')->name('result');
 });
 
 Route::group(['prefix' => 'media'], function() { 

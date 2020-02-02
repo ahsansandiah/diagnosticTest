@@ -33,9 +33,9 @@
         @endif
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Apabila anda sudah siap mengerjakan test, silahkan tekan button mulai.</p>
+            <p class="login-box-msg">Apabila anda sudah siap mengerjakan {{$testCategory}}, silahkan tekan button mulai.</p>
             <div class="social-auth-links text-center">
-                <a href="{{ url('/evaluation/formative') }}" type="button" class="btn bg-olive btn-lg btn-flat margin">MULAI</a>
+                <a href="{{ url('/evaluation/'.$testKey) }}" type="button" class="btn bg-olive btn-lg btn-flat margin">MULAI</a>
             </div>
             <!-- /.social-auth-links -->
         </div>

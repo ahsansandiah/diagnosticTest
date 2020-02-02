@@ -37,7 +37,7 @@
                         <th>Answer</th>
                     </tr>
                     @if(!empty($question->answers))
-                        <form method="POST" action="{{ '/evaluation/formative/submit' }}">
+                        <form method="POST" action="{{ url('/evaluation/formative/submit') }}">
                             @csrf
                             <input type="hidden" name="question_id" value="{{ $question->id }}">
                             <input type="hidden" name="time_limit" value="" id="time_limit">

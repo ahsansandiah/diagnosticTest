@@ -41,8 +41,9 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Penilaian <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ url('/evaluation/pretest/introduction') }}">Pre-Test</a></li>
+							<li><a href="{{ url('/evaluation/posttest/introduction') }}">Post-Test</a></li>
 							<li><a href="{{ url('/evaluation/diagnostic') }}">Diagnostik</a></li>
-							<li><a href="{{ url('/evaluation/formative/introduction') }}">Formatif</a></li>
 						</ul>
 					</li>
 					<li><a href="{{ url('profile') }}">Profile Pengembang</a></li>

@@ -159,8 +159,14 @@ return [
 
                 ],
                 [
-                    'text' => 'Formative',
-                    'url'  => 'admin/evaluation/formative',
+                    'text' => 'Post-Test',
+                    'url'  => 'admin/evaluation/posttest',
+                    'icon' => 'fas fa-fw fa-sticky-note',
+
+                ],
+                [
+                    'text' => 'Pre-Test',
+                    'url'  => 'admin/evaluation/pretest',
                     'icon' => 'fas fa-fw fa-sticky-note',
 
                 ],
@@ -216,6 +222,17 @@ return [
                     'text' => 'Student',
                     'url'  => 'admin/student',
                     'icon' => 'fas fa-fw fa-user',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Report',
+            'icon'    => 'fa fa-bar-chart',
+            'submenu' => [
+                [
+                    'text' => 'Questions',
+                    'url'  => 'admin/report/by-confluence',
+                    'icon' => 'fas fa-fw fa-bar-chart',
                 ],
             ],
         ],

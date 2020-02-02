@@ -38,8 +38,9 @@
 				                	</div>
 				                	<div class="form-group">
 				                  		<select class="form-control" name="type">
-				                  			<option value="formative">Formative</option>
 				                  			<option value="diagnostic">Diagnostic</option>
+				                  			<option value="posttest">Post-Test</option>
+				                  			<option value="pretest">Pre-Test</option>
 				                  		</select>
 				                	</div>
 				              	</div>
@@ -148,8 +149,9 @@
 									                	</div>
 									                	<div class="form-group">
 									                  		<select class="form-control" name="type">
-									                  			<option value="formative" {{ ($confluence->type == 'formative') ? 'selected' : ''}}>Formative</option>
 									                  			<option value="diagnostic" {{ ($confluence->type == 'diagnostic') ? 'selected' : ''}}>Diagnostic</option>
+									                  			<option value="pretest" {{ ($confluence->type == 'pretest') ? 'selected' : ''}}>Pre-Test</option>
+									                  			<option value="posttest" {{ ($confluence->type == 'posttest') ? 'selected' : ''}}>Post-Test</option>
 									                  		</select>
 									                	</div>
 									              	</div>
