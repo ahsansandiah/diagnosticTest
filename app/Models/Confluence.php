@@ -11,4 +11,10 @@ class Confluence extends Model
 
     protected $table = "confluence";
     protected $guarded = [];
+
+
+    public function question()
+    {
+    	return $this->hasMany('App\Models\Question', 'confluence_id', 'id');
+    }
 }

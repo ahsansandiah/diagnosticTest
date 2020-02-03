@@ -17,24 +17,29 @@ use App\Models\Confluence;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Evaluation;
+use App\Models\Student;
 
 class ReportController extends Controller
 {
 	public function getByConfluence(Request $request)
 	{
-		$questions = [];
-		if ($request->filled('confluence_id')) {
-			$evaluations = Evaluation::where('confluence_id', $request->confluence_id)->get()->groupBy('question_id');
+		$answers = [];
+		if ($request->filled('confluence_id') && $request->filled('question_id')) {
+			$evaluations = Evaluation::where('confluence_id', $request->confluence_id)
+										->where('question_id', $request->question_id)
+										->get()->groupBy('answer_id');
 
 			foreach ($evaluations as $key => $value) {
-				$questions[$key] = count($value);
+				$answers[$key] = count($value);
 			}
 		}
 
 		$confluences = Confluence::all();
-		$listQuestions = Question::whereIn('id', array_keys($questions))->withTrashed()->get();
+		$listAnswers = Answer::where('question_id', $request->question_id)->withTrashed()->get();
 		$lastId = $request->confluence_id;
+		$answerSort = ['A', 'B', 'C', 'D', 'E', 'G', 'H', 'I', 'J', 'K'];
+		$totalStudents = Student::count();
 
-		return view('contents.report.confluence', compact('questions', 'confluences', 'lastId', 'listQuestions'));
+		return view('contents.report.confluence', compact('answers', 'confluences', 'lastId', 'listAnswers', 'answerSort', 'totalStudents'));
 	}
 }

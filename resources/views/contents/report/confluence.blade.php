@@ -13,15 +13,21 @@
 	    		<div class="box-header">
 	    		</div>
 	    		<div class="box-body no-padding">
-	    			<form class="form-horizontal" method="get" action="{{ url('admin/report/by-confluence') }}">
+	    			<form class="form-horizontal" method="get" action="{{ url('admin/report/diagnostic') }}">
 	            		<div class="form-group">
 	              			<label for="inputEmail3" class="col-sm-2 control-label">Confluence</label>
-
 	              			<div class="col-sm-9">
 	                			<select class="form-control" id="inputEmail3" name="confluence_id">
 	                				@foreach ($confluences as $element)
 	                					<option value="{{ $element->id }}" {{ ($lastId == $element->id) ? 'selected' : '' }}>{{ $element->confluence }}</option>
 	                				@endforeach
+	                			</select>
+	              			</div>
+	            		</div>
+	            		<div class="form-group">
+	              			<label for="inputEmail3" class="col-sm-2 control-label">Questions</label>
+	              			<div class="col-sm-9">
+	                			<select class="form-control" id="inputEmail3" name="question_id">
 	                			</select>
 	              			</div>
 	            		</div>
@@ -43,7 +49,7 @@
 	    		</div>
 	    		<!-- /.box-header -->
 	    		<div class="box-body no-padding">
-	      			<div class="chart" id="line-chart" style="height: 300px;"></div>
+	      			<div class="chart" id="bar-chart" style="height: 300px;"></div>
 	    		</div>
 	   			<!-- /.box-body -->
 	  		</div>
@@ -64,16 +70,25 @@
 	      				<thead>
 			                <tr>
 			                  	<th>ID</th>
+			                  	<th>Number</th>
 			                  	<th>Qustions</th>
-			                  	<th>Count</th>
+			                  	<th>Total</th>
+			                  	<th>Percentage</th>
 			                </tr>
 			            </thead>
 	        			<tbody>
-	        				@foreach ($listQuestions as $question)
+	        				@foreach ($listAnswers as $key => $answer)
 	        					<tr>
-	              					<th style="width: 10px">{{ $question->id }}</th>
-	              					<th>{!! $question->question !!}</th>
-	              					<th>{{ $questions[$question->id] }}</th>
+	              					<th style="width: 10px">{{ $answer->id }}</th>
+	        						<th>{{ $answerSort[$key] }}</th>
+	              					<th>{!! $answer->answer !!}</th>
+	              					@if (!empty($answers[$answer->id]))
+	              						<th>{{ $answers[$answer->id] }}</th>
+	              						<th>{{ ($answers[$answer->id]/$totalStudents)*100 }}%</th>
+	              					@else
+	              						<th>0</th>
+	              						<th>{{ (0/$totalStudents)*100 }}%</th>
+	              					@endif
 	            				</tr>
 	        				@endforeach
 	      				</tbody>
@@ -99,16 +114,18 @@
 	<script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 	<script type="text/javascript">
 		$(function () {
-    		"use strict";
-
     		// LINE CHART
-    		var line = new Morris.Line({
-		      	element: 'line-chart',
+    		var line = new Morris.Bar({
+		      	element: 'bar-chart',
 		      	resize: true,
 		      	data: [
-		      		@if (!empty($questions))
-	   					@foreach ($questions as $key => $element)
-	  						{y: '{{$key}}', total: '{{$element}}' },
+		      		@if (!empty($listAnswers))
+	  					@foreach ($listAnswers as $key => $answer)
+	  						@if (!empty($answers[$answer->id]))
+	  							{y: '{{$answerSort[$key]}}', total: '{{$answers[$answer->id]}}' },
+	  						@else
+	  							{y: '{{$answerSort[$key]}}', total: '0' },
+	  						@endif
 	  					@endforeach
   	 				@endif
 		      	],
@@ -129,5 +146,33 @@
 	      	'info'        : true,
 	      	'autoWidth'   : false
 	    })
+	</script>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	        $('select[name="confluence_id"]').on('change', function() {
+	            var confluenceId = $(this).val();
+	            var baseUrl = '{{ url('admin/confluence/') }}';
+	            console.log(confluenceId);
+	            if(confluenceId) {
+	                $.ajax({
+	                    url: baseUrl+'/'+confluenceId+'/questions',
+	                    type: "GET",
+	                    dataType: "json",
+	                    success:function(data) {
+	                       	console.log(data);
+	                        $('select[name="question_id"]').empty();
+	                        $.each(data, function(key, value) {
+	                        	console.log(value)
+	                            $('select[name="question_id"]').append('<option value="'+ value['id'] +'"> Soal No.'+value['order']+' | '+ value['question'] +'</option>');
+	                        });
+
+
+	                    }
+	                });
+	            }else{
+	                $('select[name="question_id"]').empty();
+	            }
+	        });
+	    });
 	</script>
 @stop

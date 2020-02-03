@@ -37,12 +37,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($evaluations as $index => $evaluation)
-							<tr>
-								<td>{{ $index+1 }}</td>
-								<td>{!! $evaluation->question->question !!}</td>
-							</tr>
-						@endforeach
+						@if (!empty($evaluations))
+							@foreach($evaluations as $index => $evaluation)
+								<tr>
+									<td>{{ $index+1 }}</td>
+									<td>{!! ($evaluation->question) ? $evaluation->question->question : '' !!}</td>
+								</tr>
+							@endforeach
+						@endif
 					</tbody>
 				</table>
 			</div>

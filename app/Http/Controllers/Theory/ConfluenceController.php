@@ -85,4 +85,11 @@ class ConfluenceController extends Controller
 
         return redirect('admin/confluence')->with('message', 'Successfully set password');        
     }
+
+    public function getQuestions($confluenceId)
+    {
+        $confluence = Confluence::with('question')->find($confluenceId);
+
+        return $confluence->question;
+    }
 }

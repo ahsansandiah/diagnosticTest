@@ -27,6 +27,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 		Route::post('/update/{id}', 'Theory\ConfluenceController@update')->name('confluence.update');
 		Route::get('/delete/{id}', 'Theory\ConfluenceController@destroy')->name('confluence.delete');
 		Route::post('/set-password/{id}', 'Theory\ConfluenceController@setPassword')->name('confluence.set-password');
+
+		Route::get('/{id}/questions', 'Theory\ConfluenceController@getQuestions')->name('confluence.getQuestions');
 	});
 
 	Route::group(['prefix' => 'theory'], function() { 
@@ -114,7 +116,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 	});
 
 	Route::group(['prefix' => 'report'], function() { 
-		Route::get('/by-confluence', 'Report\ReportController@getByConfluence')->name('report.question');
+		Route::get('/diagnostic', 'Report\ReportController@getByConfluence')->name('report.question');
 	});
 });
 

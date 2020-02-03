@@ -230,8 +230,8 @@ return [
             'icon'    => 'fa fa-bar-chart',
             'submenu' => [
                 [
-                    'text' => 'Questions',
-                    'url'  => 'admin/report/by-confluence',
+                    'text' => 'Diagnostic',
+                    'url'  => 'admin/report/diagnostic',
                     'icon' => 'fas fa-fw fa-bar-chart',
                 ],
             ],
