@@ -120,6 +120,7 @@ class QuestionController extends Controller
         $answer->answer = $request->answer;
         $answer->suggestion = $request->suggestion;
         $answer->diagnosa = $request->diagnosa;
+        $answer->score = $request->score;
         $answer->save();
 
         return redirect('/admin/question/detail/'.$request->question_id)->with('status', 'Successfully created!');
@@ -131,6 +132,7 @@ class QuestionController extends Controller
         $answer->suggestion = $request->suggestion;
         $answer->answer = $request->answer;
         $answer->diagnosa = $request->diagnosa;
+        $answer->score = $request->score;
         $answer->update();
 
         return redirect('/admin/question/detail/'.$request->question_id)->with('status', 'Successfully created!');

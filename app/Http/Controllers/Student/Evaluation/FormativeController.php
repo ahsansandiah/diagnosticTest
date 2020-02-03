@@ -73,7 +73,7 @@ class FormativeController extends Controller
 			return redirect('/evaluation/'.$testKey.'/result')->with('error_message', 'Maaf, Test belum tersedia');
 		}
 
-		return view($this::BASE_VIEW_URL_PATH.'.index', compact('theory', 'question'));
+		return view($this::BASE_VIEW_URL_PATH.'.index', compact('theory', 'question', 'testKey'));
 	}
 
 	public function question($lastQuestion, $confluenceId)
@@ -130,12 +130,12 @@ class FormativeController extends Controller
 		return redirect('/evaluation/'.$testKey.'/'.$studentEvaluation->id.'/review');
 	}
 
-	public function review($evaluationId)
+	public function review($testKey, $evaluationId)
 	{
 		$evaluation = Evaluation::with(['answer', 'question', 'confluence'])->findOrFail($evaluationId);
 		$filesTheory = $this->getFileTheory($evaluation->theory_id);
 
-		return view($this::BASE_VIEW_URL_PATH.'.review', compact('evaluation', 'filesTheory'));
+		return view($this::BASE_VIEW_URL_PATH.'.review', compact('evaluation', 'filesTheory', 'testKey'));
 	}
 
 	public function result($testKey)

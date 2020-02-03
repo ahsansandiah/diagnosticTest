@@ -36,14 +36,11 @@
                             <dt>Jawaban</dt>
                             <dd>{!! $evaluation->answer->answer !!}</dd>
                             <br>
-                            <dt>Diagnosa</dt>
-                            <dd>{!! $evaluation->answer->diagnosa !!}</dd>
-                            <br>
-                            <dt>Saran</dt>
-                            <dd>{!! $evaluation->answer->suggestion !!}</dd>
+                            <dt>Score</dt>
+                            <dd>{!! $evaluation->answer->score !!}</dd>
                         </dl>
                         <hr>
-                        <form method="get" action="{{ url('evaluation/formative') }}">
+                        <form method="get" action="{{ url('evaluation/'.$testKey) }}">
                             <input type="hidden" name="last_question" value="{{ $evaluation->question->order }}">
                             <button type="submit" class="btn btn-primary btn-flat btn-sm">Lanjutkan</button>
                         </form>

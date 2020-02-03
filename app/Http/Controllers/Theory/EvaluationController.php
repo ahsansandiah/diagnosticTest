@@ -20,7 +20,6 @@ use App\Models\Confluence;
 
 class EvaluationController extends Controller
 {
-
 	public function index(Request $request, $package)
 	{
 		$query = Evaluation::where('type', $package)->with('student', 'confluence');

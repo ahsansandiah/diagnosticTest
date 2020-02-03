@@ -47,6 +47,10 @@
 			              			Suggestion
 			    					<blockquote><h4 class="box-title">{!! $answer->suggestion !!}</h4></blockquote>
 			              		</b>
+			                  	<b>
+			                  		Score
+			                  		<blockquote><h4 class="box-title">{!! $answer->score !!}</h4></blockquote>
+			                  	</b>
 			                  	@if ($answer->correct == 1) 
 			                  		<a href="{{ url('admin/question/'.$question->id.'/'.$answer->id.'/incorrect') }}" class="btn btn-success btn-flat"><i class="fa fa-check"></i></a>
 			                  	@else 
@@ -78,6 +82,10 @@
 														<div class="form-group">
 															<label>Diagnosa</label>
 															<textarea id="editDiagnosa{{ $answer->id }}" class="form-control" id="" name="diagnosa"  rows="10" cols="80">{{ $answer->diagnosa }}</textarea>
+														</div>
+														<div class="form-group">
+															<label>Score</label>
+															<input type="text" name="score" class="form-control" value="{{ $answer->score }}">
 														</div>
 														<div class="form-group" id="more_answer">
 														</div>
@@ -134,6 +142,10 @@
 									<div class="form-group">
 										<label>Diagnosa</label>
 										<textarea id="addDiagnosa" class="form-control" id="" name="diagnosa"  rows="10" cols="80"></textarea>
+									</div>
+									<div class="form-group">
+										<label>Score</label>
+										<input type="text" name="score" class="form-control">
 									</div>
 									<div class="form-group" id="more_answer">
 									</div>
