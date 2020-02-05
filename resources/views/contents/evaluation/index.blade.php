@@ -16,7 +16,7 @@
 		          		<label for="inputStudent">Student</label>
 		        		<select class="form-control" name="student_id">
 		        			@foreach($students as $student)
-		        				<option value="{{ $student->id }}">{{ $student->name }}</option>
+		        				<option value="{{ $student->id }}" {{ ($student->id == $student_selected) ? 'selected' : ''}}>{{ $student->name }}</option>
 		        			@endforeach
 		        		</select>
 		        	</div>
@@ -73,6 +73,7 @@
 					                <th>Confluence</th>
 					                <th>Score</th>
 					                <th>Time</th>
+					                <th>Date</th>
 					                <th>Action</th>
 				                </tr>
 			                </thead>
@@ -84,6 +85,7 @@
 					                	<td>{{ $evaluation->confluence['confluence'] }}</td>
 					                	<td>{{ $evaluation->score }}</td>
 					                	<td>{{ $evaluation->time }}</td>
+					                	<td>{{ $evaluation->created_at }}</td>
 					                	<td>
 					                		<a href="{{ url('admin/evaluation/detail/'.$evaluation->id.'/'.$evaluation->student_id) }}" class="btn btn-app">
 			                                    <i class="fa fa-list-ul"></i> Detail

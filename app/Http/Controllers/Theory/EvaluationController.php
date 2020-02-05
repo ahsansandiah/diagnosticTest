@@ -54,6 +54,7 @@ class EvaluationController extends Controller
 			'totalQuestion' => $totalQuestion,
 			'totalCorrectAnswer' => $totalCorrectAnswer,
 			'totalScore' => $totalScore,
+			'student_selected' => $request->student_id
 		];
 
 		return view('contents.evaluation.index', $viewData);

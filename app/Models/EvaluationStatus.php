@@ -15,7 +15,8 @@ class EvaluationStatus extends Model
     const STATUS_DONE = 'done';
     const STATUS_REMEDIAL = 'remedial';
 
-    const FORMATIVE_TYPE = 'formative';
+    const PRETEST_TYPE = 'pretest';
+    const POSTTEST_TYPE = 'posttest';
     const DIAGNOSTIC_TYPE = 'diagnostic';
 
     public function user()
@@ -26,9 +27,14 @@ class EvaluationStatus extends Model
     public function isDone($userId, $type, $confluenceId)
     {
     	switch ($type) {
-            case $this::FORMATIVE_TYPE:
+            case $this::PRETEST_TYPE:
                 $query = EvaluationStatus::where('user_id', $userId)
-                            ->where('type', $this::FORMATIVE_TYPE)
+                            ->where('type', $this::PRETEST_TYPE)
+                            ->where('status', $this::STATUS_DONE)->count();
+                break;
+            case $this::POSTTEST_TYPE:
+                $query = EvaluationStatus::where('user_id', $userId)
+                            ->where('type', $this::POSTTEST_TYPE)
                             ->where('status', $this::STATUS_DONE)->count();
                 break;
             

@@ -74,6 +74,10 @@ class DiagnosticController extends Controller
 		$confluence = Confluence::where('confluence', $name)
 								->first();
 
+		if (is_null($confluence)) {
+			return redirect('/evaluation/diagnostic');
+		}
+
 		$theory = Theory::where('confluence_id', $confluence->id)->where('category_id', $this::DIAGNOSTIC_CATEGORY)->first();
 		$medias = null;
 		if ($theory) {
@@ -120,13 +124,18 @@ class DiagnosticController extends Controller
 		$question = Question::find($questionId);
 		$answer = Answer::find($answerId);
 
+		$evaluationExisting = Evaluation::where('student_id', $student->id)->where('question_id', $question->id)->first();
+		if ($evaluationExisting) {
+			return redirect('/evaluation/diagnostic/'.$studentEvaluation->id.'/review');
+		}
+
 		$studentEvaluation = new Evaluation;
 		$studentEvaluation->student_id = $student->id;
 		$studentEvaluation->question_id = $questionId;
 		$studentEvaluation->answer_id = $answerId;
 		$studentEvaluation->confluence_id = $confluence->id;
 		$studentEvaluation->theory_id = $question->theory_id;
-		$studentEvaluation->score = $question->score;
+		$studentEvaluation->score = $answer->score;
 		$studentEvaluation->package = $question->package;
 		$studentEvaluation->correct = !is_null($answer->correct) ? $answer->correct : 0;
 		$studentEvaluation->time = $request->time_limit;
@@ -156,7 +165,13 @@ class DiagnosticController extends Controller
 		$student = $user->student;
 
 		$evaluation = (new Evaluation)->getResultByUser($student, $confluenceId, 'diagnostic');
-		return view($this::BASE_VIEW_URL_PATH.'.result', compact('evaluation'));
+		$questions = Question::with(['evaluation' => function ($query) use ($student) {
+											    $query->where('student_id', $student->id);
+											}])->has('evaluation')
+								->where('confluence_id', $confluenceId)
+								->orderBy('order')->get();
+
+		return view($this::BASE_VIEW_URL_PATH.'.result', compact('evaluation', 'questions'));
 	}
 
 }

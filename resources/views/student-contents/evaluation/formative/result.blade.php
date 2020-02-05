@@ -48,7 +48,7 @@
 				<ul class="nav nav-stacked">
 					<li><a href="#">Question <span class="pull-right badge bg-blue">{{ $evaluation['total_question'] }}</span></a></li>
 					<li><a href="#">Answer <span class="pull-right badge bg-aqua">{{ $evaluation['total_answer'] }}</span></a></li>
-					<li><a href="#">Correct <span class="pull-right badge bg-green">{{ $evaluation['correct_answer'] }}</span></a></li>
+					{{-- <li><a href="#">Correct <span class="pull-right badge bg-green">{{ $evaluation['correct_answer'] }}</span></a></li> --}}
 					<li><a href="#">Score <span class="pull-right badge bg-red">{{ $evaluation['score'] }}</span></a></li>
 				</ul>
 			</div>

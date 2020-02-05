@@ -19,6 +19,11 @@ class Question extends Model
 
     public function theory()
     {
-    	return $this->hasOne('App\Models\Theory', 'id', 'theory_id');
+        return $this->hasOne('App\Models\Theory', 'id', 'theory_id');
+    }
+
+    public function evaluation()
+    {
+    	return $this->belongsTo('App\Models\Evaluation', 'id', 'question_id');
     }
 }

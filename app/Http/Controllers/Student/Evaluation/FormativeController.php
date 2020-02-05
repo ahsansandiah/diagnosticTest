@@ -70,7 +70,7 @@ class FormativeController extends Controller
 		}
 
 		if (is_null($question)) {
-			return redirect('/evaluation/'.$testKey.'/result')->with('error_message', 'Maaf, Test belum tersedia');
+			return redirect('/evaluation/'.$testKey.'/result');
 		}
 
 		return view($this::BASE_VIEW_URL_PATH.'.index', compact('theory', 'question', 'testKey'));
@@ -114,13 +114,18 @@ class FormativeController extends Controller
 		$answer = Answer::find($request->answer_id);
 		$student = $user->student;
 
+		$evaluationExisting = Evaluation::where('student_id', $student->id)->where('question_id', $question->id)->first();
+		if ($evaluationExisting) {
+			return redirect('/evaluation/'.$testKey.'/'.$evaluationExisting->id.'/review');
+		}
+
 		$studentEvaluation = new Evaluation;
 		$studentEvaluation->student_id = $student->id;
 		$studentEvaluation->question_id = $question->id;
 		$studentEvaluation->answer_id = $answer->id;
 		$studentEvaluation->confluence_id = $question->confluence_id;
 		$studentEvaluation->theory_id = $question->theory_id;
-		$studentEvaluation->score = $question->score;
+		$studentEvaluation->score = $answer->score;
 		$studentEvaluation->correct = $answer->correct;
 		$studentEvaluation->package = $question->package;
 		$studentEvaluation->time = $request->time_limit;

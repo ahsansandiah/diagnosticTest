@@ -50,7 +50,7 @@ class Evaluation extends Model
         }
 
         $total = $query->count();
-        $score = $query->where('correct', $this::CORRECT_ANSWER)->sum('score');
+        $score = $query->sum('score');
         $correctAnswer = $query->where('correct', $this::CORRECT_ANSWER)->count();
 
         return [

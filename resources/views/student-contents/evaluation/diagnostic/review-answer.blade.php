@@ -41,6 +41,9 @@
                             <br>
                             <dt>Saran</dt>
                             <dd>{!! $evaluation->answer->suggestion !!}</dd>
+                            <br>
+                            <dt>Score</dt>
+                            <dd>{!! $evaluation->answer->score !!}</dd>
                         </dl>
                         <hr>
                         <form method="get" action="{{ url('evaluation/diagnostic/'.$confluenceName) }}">
